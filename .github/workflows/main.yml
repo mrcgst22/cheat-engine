@@ -19,7 +19,8 @@ jobs:
       run: |
         $env:PATH += ";C:\lazarus"
         cd "Cheat Engine"
-        lazbuild cheatengine.lpi
+        lazbuild --add-package-link "luaclient/luaclientcomponent.lpk"
+        lazbuild cheatengine.lpi --build-mode="Release x86_64"
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
