@@ -11,15 +11,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Setup Lazarus
-      uses: g3neration/setup-lazarus@v1
-      with:
-        lazarus-version: '2.2.6'
+    - name: Install Lazarus via Choco
+      run: |
+        choco install lazarus --yes
 
     - name: Build Cheat Engine
       run: |
+        $env:PATH += ";C:\lazarus"
         cd "Cheat Engine"
-        lazbuild cheatengine.lpi --build-mode="Release x86_64"
+        lazbuild cheatengine.lpi
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v4
